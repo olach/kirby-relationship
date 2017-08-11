@@ -1,0 +1,112 @@
+/* Field wrapper: */
+.relationship-field {
+	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid #ddd;
+	background-color: white;
+}
+
+/* Default styling for both lists: */
+.relationship-list {
+	flex: 1 0 200px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	height: 13em;
+	margin: 0;
+	padding: 0.5em;
+	border: 1px solid #ddd;
+	background-color: white;
+	list-style: none;
+}
+
+/* The list with all unselected items should be hidden: */
+.relationship-list--unselected {
+	display: none;
+}
+
+/* Reset native button styles: */
+.relationship-list button {
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+}
+
+.relationship-list button:not([disabled]) {
+	cursor: pointer;
+}
+
+/* Default styling for all list items: */
+.relationship-list--available button,
+.relationship-list--selected li {
+	position: relative;
+	padding: 5px 2em 5px 7px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* List with available items: */
+.relationship-list--available {
+	background-color: #f7f7f7;
+}
+
+.relationship-list--available button {
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
+.relationship-list--available button:not([disabled]):hover,
+.relationship-list--available button:not([disabled]):focus {
+	background-color: rgba(0, 0, 0, 0.075);
+}
+
+.relationship-list--available button[disabled] {
+	color: #777;
+}
+
+.relationship-list--available .icon-add {
+	position: absolute;
+	right: 0.5em;
+}
+
+.relationship-list--available button[disabled] .icon-add {
+	display: none;
+}
+
+/* Selected list items: */
+.relationship-list--selected li {
+	padding-right: 2em;
+	cursor: move;
+}
+
+.relationship-list--selected li input[type="checkbox"] {
+	display: none;
+}
+
+/* List item during sorting: */
+.relationship-list--selected li.ui-sortable-helper {
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 150ms ease-out;
+}
+
+/* Placeholder item when sorting: */
+.relationship-list--selected li.ui-sortable-placeholder {
+	background-color: rgba(0, 0, 0, 0.025);
+}
+
+/* Delete icon: */
+.relationship-list--selected li .icon-delete {
+	position: absolute;
+	right: 0.5em;
+}
+
+/* Sort icon: */
+.relationship-list--selected li .icon-left {
+	color: #ccc;
+}

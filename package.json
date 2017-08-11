@@ -1,0 +1,12 @@
+{
+	"name": "relationship",
+	"description": "Sortable multiselect field for Kirby 2 CMS",
+	"author": "Ola Christensson <ola.christensson@grandpublic.se>",
+	"version": "1.0.0",
+	"type": "kirby-field",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/olach/kirby-relationship"
+	}
+}
