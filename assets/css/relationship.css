@@ -8,7 +8,7 @@
 
 /* Default styling for both lists: */
 .relationship-list {
-	flex: 1 0 200px;
+	flex: 1 0 14em;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
@@ -42,7 +42,8 @@
 .relationship-list--available button,
 .relationship-list--selected li {
 	position: relative;
-	padding: 5px 2em 5px 7px;
+	padding: 0.31em 0.5em;
+	padding-right: 2em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
