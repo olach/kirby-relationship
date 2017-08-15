@@ -1,12 +1,16 @@
 /* Field wrapper: */
 .relationship-field {
-	display: flex;
-	flex-wrap: wrap;
-	border: 1px solid #ddd;
 	background-color: white;
 }
 
-/* Default styling for both lists: */
+/* Wrapper for the lists: */
+.relationship-lists {
+	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid #ddd;
+}
+
+/* Default styling for the lists: */
 .relationship-list {
 	flex: 1 0 14em;
 	overflow-x: hidden;
