@@ -81,6 +81,19 @@ related:
 
 ## Extra features
 
+### Search:
+To enable search, add `search: true` to the field settings in your blueprint.
+
+```yaml
+related:
+  label: Related articles
+  type: relationship
+  options: query
+  query:
+    fetch: siblings
+  search: true
+```
+
 ### Controller:
 This field is extended with an option to use a user specified function to have even more control of the options that will be loaded. The idea is taken from the [Controlled List plugin](https://github.com/rasteiner/controlledlist).
 

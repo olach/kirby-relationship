@@ -3,6 +3,7 @@
 class RelationshipField extends CheckboxesField {
 	
 	public $controller;
+	public $search;
 	
 	static public $assets = array(
 		'js' => array(

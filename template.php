@@ -18,10 +18,17 @@ $unselected_options = array_diff($all_options, $selected_options);
 <div class="field-content">
 	<div class="relationship-field" data-field="relationship">
 		
+		<?php if ($field->search()): ?>
+		<div class="relationship-search">
+			<i class="icon fa fa-search"></i>
+			<input class="input" type="text" />
+		</div>
+		<?php endif ?>
+		
 		<div class="relationship-lists">
 			<ul class="relationship-list relationship-list--available">
 				<?php foreach ($all_options as $key => $value): ?>
-					<li>
+					<li<?php e($field->search(), ' data-search-index="' . mb_strtolower($value) . '"') ?>>
 						<button type="button" data-key="<?php echo $key; ?>"<?php e(array_key_exists($key, $selected_options), ' disabled') ?> aria-label="<?php echo i18n('add') ?> <?php echo $value ?>">
 							<?php echo $value ?>
 							<span class="icon-add" aria-hidden="true">
