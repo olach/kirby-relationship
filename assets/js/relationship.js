@@ -86,7 +86,7 @@
 		 * Search the list when typing in the search input field:
 		 */
 		$search_input.on('input', function() {
-			var search_term = $(this).val();
+			var search_term = $(this).val().toLowerCase();
 			
 			$search_items.each(function() {
 				if ($(this).data('search-index').indexOf(search_term) > -1) {
