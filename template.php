@@ -33,7 +33,7 @@ $unselected_options = array_diff($all_options, $selected_options);
 		
 		<ul class="relationship-list relationship-list--selected">
 			<?php foreach ($selected_options as $key => $value): ?>
-				<li data-key="<?php echo $key; ?>">
+				<li data-key="<?php echo $key; ?>" data-focus="true">
 					<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" checked />
 					<i class="icon icon-left fa fa-bars" aria-hidden="true"></i>
 					<span><?php echo $value; ?></span>
@@ -44,7 +44,7 @@ $unselected_options = array_diff($all_options, $selected_options);
 		
 		<ul class="relationship-list relationship-list--unselected">
 			<?php foreach ($unselected_options as $key => $value): ?>
-				<li data-key="<?php echo $key; ?>">
+				<li data-key="<?php echo $key; ?>" data-focus="true">
 					<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" />
 					<i class="icon icon-left fa fa-bars" aria-hidden="true"></i>
 					<span><?php echo $value; ?></span>

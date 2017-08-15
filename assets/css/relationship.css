@@ -60,13 +60,17 @@
 	text-align: left;
 }
 
-.relationship-list--available button:not([disabled]):hover,
-.relationship-list--available button:not([disabled]):focus {
+.relationship-list--available button:not([disabled]):hover {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
 .relationship-list--available button[disabled] {
 	color: #777;
+}
+
+.relationship-list--available button:focus {
+	outline: none;
+	box-shadow: inset 0 0 0 2px #8dae28;
 }
 
 .relationship-list--available .icon-add {
@@ -86,6 +90,14 @@
 
 .relationship-list--selected li input[type="checkbox"] {
 	display: none;
+}
+
+.relationship-list--selected li button:focus {
+	outline: none;
+}
+
+.relationship-list--selected li.input-is-focused {
+	box-shadow: inset 0 0 0 2px #8dae28;
 }
 
 /* List item during sorting: */
