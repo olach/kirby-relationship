@@ -58,6 +58,10 @@
 	background-color: #f7f7f7;
 }
 
+.relationship-list--available li[aria-hidden="true"] {
+	display: none;
+}
+
 .relationship-list--available button {
 	display: block;
 	width: 100%;
@@ -126,4 +130,22 @@
 /* Sort icon: */
 .relationship-list--selected li .icon-left {
 	color: #ccc;
+}
+
+/* Search input: */
+.relationship-search {
+	position: relative;
+}
+
+.relationship-search .input {
+	padding-left: 2.5em;
+	margin-bottom: -2px; /* Prevent double borders */
+}
+
+.relationship-search .icon {
+	position: absolute;
+	top: calc(50% - 0.5em);
+	left: 2px;
+	width: 3em;
+	color: #777;
 }

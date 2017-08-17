@@ -7,6 +7,10 @@
 		var $list_selected = $(field).find('.relationship-list--selected');
 		var $list_unselected = $(field).find('.relationship-list--unselected');
 		
+		// Get references to search elements:
+		var $search_input = $(field).find('.relationship-search input');
+		var $search_items = $list_available.find('li');
+		
 		/**
 		 * Add an item to the selection on click:
 		 */
@@ -76,6 +80,24 @@
 				// Notify Kirby that some changes are made:
 				ui.item.find('input').trigger('change');
 			}
+		});
+		
+		/**
+		 * Search the list when typing in the search input field:
+		 */
+		$search_input.on('input', function() {
+			var search_term = $(this).val().toLowerCase();
+			
+			$search_items.each(function() {
+				if ($(this).data('search-index').indexOf(search_term) > -1) {
+					$(this).attr('aria-hidden', false);
+				} else {
+					$(this).attr('aria-hidden', true);
+				}
+			});
+			
+			// Scroll to top:
+			$list_available.scrollTop(0);
 		});
 	};
 	
