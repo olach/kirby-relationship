@@ -75,7 +75,9 @@
 		$list_selected.sortable({
 			revert: 100,
 			placeholder: 'ui-sortable-placeholder',
-			forcePlaceholderSize: true,
+			start: function(event, ui) {
+				ui.placeholder.height(ui.item.height());
+			},
 			update: function(event, ui) {
 				// Notify Kirby that some changes are made:
 				ui.item.find('input').trigger('change');
