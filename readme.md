@@ -110,11 +110,11 @@ class MyPlugin {
     $users = $site->users();
 
     $result = array();
+
     foreach ($users as $user) {
       if (!empty($user->firstName()) && !empty($user->lastName())) {
         $result[$user->username()] = $user->firstName() . ' ' . $user->lastName();
-      }
-      else {
+      } else {
         $result[$user->username()] = $user->username();
       }
     }
