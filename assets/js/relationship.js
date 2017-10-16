@@ -14,26 +14,23 @@
 		/**
 		 * Add an item to the selection on click:
 		 */
-		$list_available.on('click', 'button:not([disabled])', function(event) {
+		$list_available.on('click', 'li:not([aria-disabled="true"])', function(event) {
 			event.preventDefault();
 			
-			// Clicked item should be disabled:
-			$(this).prop('disabled', true);
-			
-			// Get key of clicked item:
-			var key = $(this).data('key');
-			
-			// Find item in unselected list:
-			var $selected_item = $list_unselected.find('li[data-key="' + key + '"]');
+			// Clone selected item:
+			var $cloned_item = $(this).clone();
 			
 			// Move the selected item to the end of the selected list:
-			$selected_item.appendTo($list_selected);
+			$cloned_item.appendTo($list_selected);
 			
-			// Set the checkbox as checked:
-			$selected_item.find('input').prop('checked', true);
+			// Set the checkbox as checked on the cloned item:
+			$cloned_item.find('input').prop('checked', true);
 			
 			// Notify Kirby that some changes are made:
-			$selected_item.find('input').trigger('change');
+			$cloned_item.find('input').trigger('change');
+			
+			// Clicked item should be disabled:
+			$(this).attr('aria-disabled', 'true');
 			
 			// Scroll to bottom of the list to show the new item:
 			$list_selected.stop().delay(20).animate({
@@ -52,20 +49,20 @@
 			// Get a reference of the item to be removed from the selection:
 			var $selected_item = $(this).closest('li');
 			
-			// Move the selected item to the unselected list:
-			$selected_item.appendTo($list_unselected);
-			
-			// Set the checkbox as unchecked:
-			$selected_item.find('input').prop('checked', false);
-			
-			// Notify Kirby that some changes are made:
-			$selected_item.find('input').trigger('change');
-			
 			// Get the key of the selected item:
 			var key = $selected_item.data('key');
 			
+			// Remove the selected item:
+			$selected_item.remove();
+			
+			// Get a reference of the available item:
+			var $available_item = $list_available.find('li[data-key="' + key + '"]');
+			
 			// Make the selected item available again in the available list:
-			$list_available.find('button[data-key="' + key + '"]').prop('disabled', false);
+			$available_item.attr('aria-disabled', 'false');
+			
+			// Notify Kirby that some changes are made:
+			$available_item.find('input').trigger('change');
 		});
 		
 		/**

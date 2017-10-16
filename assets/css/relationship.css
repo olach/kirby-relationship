@@ -24,11 +24,6 @@
 	list-style: none;
 }
 
-/* The list with all unselected items should be hidden: */
-.relationship-list--unselected {
-	display: none;
-}
-
 /* Reset native button styles: */
 .relationship-list button {
 	border: none;
@@ -43,14 +38,33 @@
 }
 
 /* Default styling for all list items: */
-.relationship-list--available button,
-.relationship-list--selected li {
+.relationship-list li {
 	position: relative;
 	padding: 0.31em 0.5em;
 	padding-right: 2em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	cursor: pointer;
+}
+
+.relationship-list li[aria-hidden="true"] {
+	display: none;
+}
+
+.relationship-list li .icon-sort {
+	color: #ccc;
+}
+
+.relationship-list li .icon-add,
+.relationship-list li .icon-delete {
+	position: absolute;
+	right: 0.5em;
+}
+
+/* Hide the checkboxes: */
+.relationship-list li input[type="checkbox"] {
+	display: none;
 }
 
 /* List with available items: */
@@ -58,54 +72,27 @@
 	background-color: #f7f7f7;
 }
 
-.relationship-list--available li[aria-hidden="true"] {
-	display: none;
-}
-
-.relationship-list--available button {
-	display: block;
-	width: 100%;
-	text-align: left;
-}
-
-.relationship-list--available button:not([disabled]):hover {
+.relationship-list--available li:not([aria-disabled="true"]):hover {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
-.relationship-list--available button[disabled] {
+.relationship-list--available li[aria-disabled="true"] {
 	color: #777;
 }
 
-.relationship-list--available button:focus {
-	outline: none;
-	box-shadow: inset 0 0 0 2px #8dae28;
-}
-
-.relationship-list--available .icon-add {
-	position: absolute;
-	right: 0.5em;
-}
-
-.relationship-list--available button[disabled] .icon-add {
+.relationship-list--available li .icon-sort,
+.relationship-list--available li .icon-delete,
+.relationship-list--available li[aria-disabled="true"] .icon-add {
 	display: none;
 }
 
 /* Selected list items: */
 .relationship-list--selected li {
-	padding-right: 2em;
 	cursor: move;
 }
 
-.relationship-list--selected li input[type="checkbox"] {
+.relationship-list--selected li .icon-add {
 	display: none;
-}
-
-.relationship-list--selected li button:focus {
-	outline: none;
-}
-
-.relationship-list--selected li.input-is-focused {
-	box-shadow: inset 0 0 0 2px #8dae28;
 }
 
 /* List item during sorting: */
@@ -119,17 +106,6 @@
 /* Placeholder item when sorting: */
 .relationship-list--selected li.ui-sortable-placeholder {
 	background-color: rgba(0, 0, 0, 0.025);
-}
-
-/* Delete icon: */
-.relationship-list--selected li .icon-delete {
-	position: absolute;
-	right: 0.5em;
-}
-
-/* Sort icon: */
-.relationship-list--selected li .icon-left {
-	color: #ccc;
 }
 
 /* Search input: */
