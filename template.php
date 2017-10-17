@@ -26,10 +26,18 @@ foreach ($values as $value) {
 				<?php foreach ($all_options as $key => $value): ?>
 					<li data-key="<?php echo $key; ?>"<?php e($field->search(), ' data-search-index="' . mb_strtolower($value) . '"') ?> aria-disabled="<?php e(array_key_exists($key, $selected_options), 'true', 'false') ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" />
-						<i class="icon icon-sort icon-left fa fa-bars" aria-hidden="true"></i>
-						<span><?php echo $value ?></span>
-						<button class="icon-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>"><i class="icon fa fa-plus-circle" aria-hidden="true"></i></button>
-						<button class="icon-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>"><i class="icon fa fa-minus-circle" aria-hidden="true"></i></button>
+						<span class="relationship-item-sort">
+							<i class="icon fa fa-bars" aria-hidden="true"></i>
+						</span>
+						<span class="relationship-item-label">
+							<?php echo $value ?>
+						</span>
+						<button class="relationship-item-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>">
+							<i class="icon fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
+						<button class="relationship-item-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>">
+							<i class="icon fa fa-minus-circle" aria-hidden="true"></i>
+						</button>
 					</li>
 				<?php endforeach ?>
 			</ul>
@@ -38,10 +46,18 @@ foreach ($values as $value) {
 				<?php foreach ($selected_options as $key => $value): ?>
 					<li data-key="<?php echo $key; ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" checked />
-						<i class="icon icon-sort icon-left fa fa-bars" aria-hidden="true"></i>
-						<span><?php echo $value; ?></span>
-						<button class="icon-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>"><i class="icon fa fa-plus-circle" aria-hidden="true"></i></button>
-						<button class="icon-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>"><i class="icon fa fa-minus-circle" aria-hidden="true"></i></button>
+						<span class="relationship-item-sort">
+							<i class="icon fa fa-bars" aria-hidden="true"></i>
+						</span>
+						<span class="relationship-item-label">
+							<?php echo $value; ?>
+						</span>
+						<button class="relationship-item-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>">
+							<i class="icon fa fa-plus-circle" aria-hidden="true"></i>
+						</button>
+						<button class="relationship-item-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>">
+							<i class="icon fa fa-minus-circle" aria-hidden="true"></i>
+						</button>
 					</li>
 				<?php endforeach ?>
 			</ul>

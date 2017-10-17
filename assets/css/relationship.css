@@ -39,27 +39,31 @@
 
 /* Default styling for all list items: */
 .relationship-list li {
-	position: relative;
-	padding: 0.31em 0.5em;
-	padding-right: 2em;
-	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	padding: 0.25em;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	cursor: pointer;
+}
+
+.relationship-list li > * {
+	padding: 0 0.25em;
+	box-sizing: content-box;
 }
 
 .relationship-list li[aria-hidden="true"] {
 	display: none;
 }
 
-.relationship-list li .icon-sort {
-	color: #ccc;
+.relationship-list li .relationship-item-label {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.relationship-list li .icon-add,
-.relationship-list li .icon-delete {
-	position: absolute;
-	right: 0.5em;
+.relationship-list li .relationship-item-sort {
+	color: #ccc;
 }
 
 /* Hide the checkboxes: */
@@ -80,9 +84,9 @@
 	color: #777;
 }
 
-.relationship-list--available li .icon-sort,
-.relationship-list--available li .icon-delete,
-.relationship-list--available li[aria-disabled="true"] .icon-add {
+.relationship-list--available li .relationship-item-sort,
+.relationship-list--available li .relationship-item-delete,
+.relationship-list--available li[aria-disabled="true"] .relationship-item-add {
 	display: none;
 }
 
@@ -91,7 +95,7 @@
 	cursor: move;
 }
 
-.relationship-list--selected li .icon-add {
+.relationship-list--selected li .relationship-item-add {
 	display: none;
 }
 
