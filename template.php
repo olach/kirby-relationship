@@ -22,7 +22,7 @@ foreach ($values as $value) {
 		<?php endif ?>
 		
 		<div class="relationship-lists">
-			<ul class="relationship-list relationship-list--available">
+			<ul class="relationship-list relationship-list--available" tabindex="0">
 				<?php foreach ($all_options as $key => $value): ?>
 					<li data-key="<?php echo $key; ?>"<?php e($field->search(), ' data-search-index="' . mb_strtolower($value) . '"') ?> aria-disabled="<?php e(array_key_exists($key, $selected_options), 'true', 'false') ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" />
@@ -42,7 +42,7 @@ foreach ($values as $value) {
 				<?php endforeach ?>
 			</ul>
 			
-			<ul class="relationship-list relationship-list--selected">
+			<ul class="relationship-list relationship-list--selected" tabindex="0">
 				<?php foreach ($selected_options as $key => $value): ?>
 					<li data-key="<?php echo $key; ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" checked />

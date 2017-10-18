@@ -30,6 +30,14 @@
 	list-style: none;
 }
 
+/* List in focus, add a green 2px border: */
+.relationship-list:focus {
+	border-color: #8dae28; /* Only 1px */
+	box-shadow: 0px 0px 0px 1px #8dae28; /* Add another 1px border */
+	outline: none;
+	position: relative; /* Prevent border to go underneath the other list */
+}
+
 /* Reset native button styles: */
 .relationship-list button {
 	border: none;
