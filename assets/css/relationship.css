@@ -59,6 +59,10 @@
 .relationship-list li > * {
 	padding: 0 0.25em;
 	box-sizing: content-box;
+	
+	/* Workaround for a bug in IE 10: Inline elements are not treated as flex-items */
+	/* https://github.com/philipwalton/flexbugs#12-inline-elements-are-not-treated-as-flex-items */
+	display: block;
 }
 
 .relationship-list li[aria-hidden="true"] {
