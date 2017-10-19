@@ -100,17 +100,17 @@
 	background-color: #f7f7f7;
 }
 
-.relationship-list--available li:not([aria-disabled="true"]):hover {
+.relationship-list--available li:not([aria-selected="true"]):hover {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
-.relationship-list--available li[aria-disabled="true"] {
+.relationship-list--available li[aria-selected="true"] {
 	color: #777;
 }
 
 .relationship-list--available li .relationship-item-sort,
 .relationship-list--available li .relationship-item-delete,
-.relationship-list--available li[aria-disabled="true"] .relationship-item-add {
+.relationship-list--available li[aria-selected="true"] .relationship-item-add {
 	display: none;
 }
 

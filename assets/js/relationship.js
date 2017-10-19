@@ -14,7 +14,7 @@
 		/**
 		 * Add an item to the selection on click:
 		 */
-		$list_available.on('click', 'li:not([aria-disabled="true"])', function(event) {
+		$list_available.on('click', 'li:not([aria-selected="true"])', function(event) {
 			event.preventDefault();
 			
 			// Clone selected item:
@@ -29,8 +29,8 @@
 			// Notify Kirby that some changes are made:
 			$cloned_item.find('input').trigger('change');
 			
-			// Clicked item should be disabled:
-			$(this).attr('aria-disabled', 'true');
+			// Clicked item should be marked as selected:
+			$(this).attr('aria-selected', 'true');
 			
 			// Scroll to bottom of the list to show the new item:
 			$list_selected.stop().delay(20).animate({
@@ -59,7 +59,7 @@
 			var $available_item = $list_available.find('li[data-key="' + key + '"]');
 			
 			// Make the selected item available again in the available list:
-			$available_item.attr('aria-disabled', 'false');
+			$available_item.attr('aria-selected', 'false');
 			
 			// Notify Kirby that some changes are made:
 			$available_item.find('input').trigger('change');

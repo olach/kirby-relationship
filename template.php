@@ -22,9 +22,9 @@ foreach ($values as $value) {
 		<?php endif ?>
 		
 		<div class="relationship-lists">
-			<ul class="relationship-list relationship-list--available" tabindex="0">
+			<ul class="relationship-list relationship-list--available" role="listbox" aria-multiselectable="true" aria-activedescendant="" tabindex="0">
 				<?php foreach ($all_options as $key => $value): ?>
-					<li data-key="<?php echo $key; ?>"<?php e($field->search(), ' data-search-index="' . mb_strtolower($value) . '"') ?> aria-disabled="<?php e(array_key_exists($key, $selected_options), 'true', 'false') ?>">
+					<li role="option" data-key="<?php echo $key; ?>"<?php e($field->search(), ' data-search-index="' . mb_strtolower($value) . '"') ?> aria-selected="<?php e(array_key_exists($key, $selected_options), 'true', 'false') ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" />
 						<span class="relationship-item-sort">
 							<i class="icon fa fa-bars" aria-hidden="true"></i>
@@ -42,9 +42,9 @@ foreach ($values as $value) {
 				<?php endforeach ?>
 			</ul>
 			
-			<ul class="relationship-list relationship-list--selected" tabindex="0">
+			<ul class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" tabindex="0">
 				<?php foreach ($selected_options as $key => $value): ?>
-					<li data-key="<?php echo $key; ?>">
+					<li role="option" data-key="<?php echo $key; ?>">
 						<input type="checkbox" name="<?php echo $field->name() . '[]' ?>" value="<?php echo $key ?>" aria-hidden="true" checked />
 						<span class="relationship-item-sort">
 							<i class="icon fa fa-bars" aria-hidden="true"></i>
