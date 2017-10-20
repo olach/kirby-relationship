@@ -46,7 +46,7 @@ foreach ($values as $value) {
 				<?php endforeach ?>
 			</ul>
 			
-			<ul class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" tabindex="0">
+			<ul class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" data-sortable="true" data-deletable="true" tabindex="0">
 				<?php $counter = 0 ?>
 				<?php foreach ($selected_options as $key => $value): ?>
 					<?php $counter++ ?>
