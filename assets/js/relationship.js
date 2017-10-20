@@ -23,6 +23,9 @@
 			// Move the selected item to the end of the selected list:
 			$cloned_item.appendTo($list_selected);
 			
+			// Change id to a unique value:
+			$cloned_item.attr('id', $cloned_item.attr('id') + '_selected');
+			
 			// Set the checkbox as checked on the cloned item:
 			$cloned_item.find('input').prop('checked', true);
 			
