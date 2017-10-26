@@ -30,6 +30,14 @@
 	list-style: none;
 }
 
+/* List in focus, add a green 2px border: */
+.relationship-list:focus {
+	border-color: #8dae28; /* Only 1px */
+	box-shadow: 0px 0px 0px 1px #8dae28; /* Add another 1px border */
+	outline: none;
+	position: relative; /* Prevent border to go underneath the other list */
+}
+
 /* Reset native button styles: */
 .relationship-list button {
 	border: none;
@@ -92,17 +100,17 @@
 	background-color: #f7f7f7;
 }
 
-.relationship-list--available li:not([aria-disabled="true"]):hover {
+.relationship-list--available:focus li.is-focused {
 	background-color: rgba(0, 0, 0, 0.075);
 }
 
-.relationship-list--available li[aria-disabled="true"] {
+.relationship-list--available li[aria-selected="true"] {
 	color: #777;
 }
 
 .relationship-list--available li .relationship-item-sort,
 .relationship-list--available li .relationship-item-delete,
-.relationship-list--available li[aria-disabled="true"] .relationship-item-add {
+.relationship-list--available li[aria-selected="true"] .relationship-item-add {
 	display: none;
 }
 
@@ -115,16 +123,21 @@
 	display: none;
 }
 
+.relationship-list--selected:focus li.is-focused {
+	background-color: rgba(0, 0, 0, 0.075);
+}
+
 /* List item during sorting: */
-.relationship-list--selected li.ui-sortable-helper {
+.relationship-list--selected[data-sortable="true"]:focus li[aria-selected="true"],
+.relationship-list--selected[data-sortable="true"] li.ui-sortable-helper {
 	background-color: white;
 	border-radius: 2px;
-	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
 	transition: box-shadow 150ms ease-out;
 }
 
 /* Placeholder item when sorting: */
-.relationship-list--selected li.ui-sortable-placeholder {
+.relationship-list--selected[data-sortable="true"] li.ui-sortable-placeholder {
 	background-color: rgba(0, 0, 0, 0.025);
 }
 

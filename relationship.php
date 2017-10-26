@@ -7,6 +7,8 @@ class RelationshipField extends CheckboxesField {
 	
 	static public $assets = array(
 		'js' => array(
+			'relationship-keycode.js',
+			'relationship-listbox.js',
 			'relationship.js'
 		),
 		'css' => array(

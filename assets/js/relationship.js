@@ -5,32 +5,41 @@
 		// Get references to the item lists:
 		var $list_available = $(field).find('.relationship-list--available');
 		var $list_selected = $(field).find('.relationship-list--selected');
-		var $list_unselected = $(field).find('.relationship-list--unselected');
+		
+		// Initialize the listbox functionality on the lists:
+		var listbox_available = new kirbyPlugin.Relationship.Listbox($list_available.get(0));
+		var listbox_selected = new kirbyPlugin.Relationship.Listbox($list_selected.get(0));
 		
 		// Get references to search elements:
 		var $search_input = $(field).find('.relationship-search input');
 		var $search_items = $list_available.find('li');
 		
-		/**
-		 * Add an item to the selection on click:
-		 */
-		$list_available.on('click', 'li:not([aria-disabled="true"])', function(event) {
-			event.preventDefault();
+		// An item in the available list has been selected/deselected:
+		listbox_available.selectCallback = function (item, selected) {
+			if (selected) {
+				listbox_selected.addItem(item.cloneNode(true));
+			} else {
+				var key = item.getAttribute('data-key');
+				listbox_selected.deleteItem($list_selected.find('li[data-key="' + key + '"]').get(0));
+			}
+		}
+		
+		// An item is added to the selected list:
+		listbox_selected.addCallback = function (addedItem) {
+			var $addedItem = $(addedItem);
 			
-			// Clone selected item:
-			var $cloned_item = $(this).clone();
+			// Change id to a unique value:
+			$addedItem.attr('id', $addedItem.attr('id') + '_selected');
 			
-			// Move the selected item to the end of the selected list:
-			$cloned_item.appendTo($list_selected);
+			// Clean the item from specific attributes and classes:
+			$addedItem.attr('aria-selected', 'false');
+			$addedItem.removeClass('is-focused');
 			
-			// Set the checkbox as checked on the cloned item:
-			$cloned_item.find('input').prop('checked', true);
+			// Set the checkbox as checked:
+			$addedItem.find('input').prop('checked', true);
 			
 			// Notify Kirby that some changes are made:
-			$cloned_item.find('input').trigger('change');
-			
-			// Clicked item should be disabled:
-			$(this).attr('aria-disabled', 'true');
+			$addedItem.find('input').trigger('change');
 			
 			// Scroll to bottom of the list to show the new item:
 			$list_selected.stop().delay(20).animate({
@@ -38,32 +47,38 @@
 			}, {
 				duration: 600
 			});
-		});
+		}
 		
-		/**
-		 * Remove a selected item on click:
-		 */
+		// Remove a selected item on click:
 		$list_selected.on('click', 'button', function(event) {
 			event.preventDefault();
 			
 			// Get a reference of the item to be removed from the selection:
 			var $selected_item = $(this).closest('li');
 			
-			// Get the key of the selected item:
-			var key = $selected_item.data('key');
+			listbox_selected.deleteItem($selected_item.get(0));
+		});
+		
+		// An item in the selected list has been deleted:
+		listbox_selected.deleteCallback = function (deletedItem) {
+			// Get the key of the deleted item:
+			var key = $(deletedItem).data('key');
 			
-			// Remove the selected item:
-			$selected_item.remove();
-			
-			// Get a reference of the available item:
+			// Get a reference of the item in the available list:
 			var $available_item = $list_available.find('li[data-key="' + key + '"]');
 			
-			// Make the selected item available again in the available list:
-			$available_item.attr('aria-disabled', 'false');
+			// Make the selected item unselected again in the available list:
+			$available_item.attr('aria-selected', false);
 			
 			// Notify Kirby that some changes are made:
 			$available_item.find('input').trigger('change');
-		});
+		}
+		
+		// Item in selected list has changed order:
+		listbox_selected.sortCallback = function (element) {
+			// Notify Kirby that the sort order has changed:
+			$(element).find('input').trigger('change');
+		}
 		
 		/**
 		 * Make the list sortable using jQuery Sortable library
