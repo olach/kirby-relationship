@@ -33,6 +33,7 @@ foreach ($values as $value) {
 						<span class="relationship-item-sort">
 							<i class="icon fa fa-bars" aria-hidden="true"></i>
 						</span>
+						<?php echo $field->thumbnail($key) ?>
 						<span class="relationship-item-label">
 							<?php echo $value ?>
 						</span>
@@ -55,6 +56,7 @@ foreach ($values as $value) {
 						<span class="relationship-item-sort">
 							<i class="icon fa fa-bars" aria-hidden="true"></i>
 						</span>
+						<?php echo $field->thumbnail($key) ?>
 						<span class="relationship-item-label">
 							<?php echo $value; ?>
 						</span>
