@@ -79,7 +79,7 @@ related:
 </ul>
 ```
 
-## Extra features
+## Features
 
 ### Search:
 To enable search, add `search: true` to the field settings in your blueprint.
@@ -131,6 +131,111 @@ users:
   label: Users
   type: relationship
   controller: MyPlugin::userlist
+```
+
+### Thumbnails:
+It's possible to show a small thumbnail for each list item. There are three different ways to do this:
+
+#### Options list
+Manually specify a set of URLs pointing to images to be used as thumbnails.
+
+No downscaling is performed here, the images are used as is. So be kind to your users and don't link to high resolution images.
+
+```yaml
+countries:
+  label: Countries
+  type: relationship
+  options:
+    sweden: Sweden
+    norway: Norway
+    denmark: Denmark
+    finland: Finland
+    iceland: Iceland
+    germany: Germany
+    france: France
+    spain: Spain
+    portugal: Portugal
+  thumbs:
+    options:
+      sweden: /assets/images/flag-sweden.png
+      norway: /assets/images/flag-norway.png
+      denmark: /assets/images/flag-denmark.png
+      finland: /assets/images/flag-finland.png
+      iceland: /assets/images/flag-iceland.png
+      germany: /assets/images/flag-germany.png
+      france: /assets/images/flag-france.png
+      spain: /assets/images/flag-spain.png
+      portugal: /assets/images/flag-portugal.png
+```
+
+#### Image field
+By specifying the field name of an image field, the thumbnails can be fetched automatically. This requires that the list items are regular pages with an image field specified. Also, make sure that the value attribute used are page URIs.
+
+The images are shown downscaled. The default thumbnail size of the panel is used, so no additional thumbnail generation is being done.
+
+```yaml
+related:
+  label: Related articles
+  type: relationship
+  options: query
+  query:
+    fetch: siblings
+    value: '{{uri}}'
+  thumbs:
+    field: featured_image
+```
+
+#### Thumbnails controller
+For full control, you can specify a user specified function to be used for the thumbnails. The function needs to return a URL to an image.
+
+The following example extends the previous panel users example by showing their avatars as thumbnails.
+
+`site/plugins/myplugin/myplugin.php`:
+
+```php
+class MyPlugin {
+  static function userlist($field) {
+    $kirby = kirby();
+    $site = $kirby->site();
+    $users = $site->users();
+
+    $result = array();
+
+    foreach ($users as $user) {
+      if (!empty($user->firstName()) && !empty($user->lastName())) {
+        $result[$user->username()] = $user->firstName() . ' ' . $user->lastName();
+      } else {
+        $result[$user->username()] = $user->username();
+      }
+    }
+
+    return $result;
+  }
+
+  static function useravatar($key, $field) {
+    $kirby = kirby();
+    $site = $kirby->site();
+
+    $url = '';
+
+    if ($avatar = $site->user($key)->avatar()):
+      $url = $avatar->crop(75)->url();
+    endif;
+
+    return $url;
+  }
+}
+```
+
+In your blueprint:
+
+```yaml
+users:
+  label: Users
+  type: relationship
+  controller: MyPlugin::userlist
+  thumbs:
+    controller: MyPlugin::useravatar
 ```
 
 ## Version history

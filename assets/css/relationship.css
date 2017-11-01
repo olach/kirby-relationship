@@ -65,8 +65,7 @@
 }
 
 .relationship-list li > * {
-	padding: 0 0.25em;
-	box-sizing: content-box;
+	margin: 0 0.25em;
 	
 	/* Workaround for a bug in IE 10: Inline elements are not treated as flex-items */
 	/* https://github.com/philipwalton/flexbugs#12-inline-elements-are-not-treated-as-flex-items */
@@ -90,6 +89,15 @@
 	color: #ccc;
 }
 
+.relationship-list li .relationship-item-thumb {
+	width: 1.375em;
+	height: 1.375em;
+	margin-top: -0.1875em;
+	margin-bottom: -0.1875em;
+	object-fit: cover;
+	border-radius: 12%;
+}
+
 /* Hide the checkboxes: */
 .relationship-list li input[type="checkbox"] {
 	display: none;
@@ -106,6 +114,11 @@
 
 .relationship-list--available li[aria-selected="true"] {
 	color: #777;
+}
+
+.relationship-list--available li[aria-selected="true"] .relationship-item-thumb {
+	opacity: 0.2;
+	filter: grayscale(100%);
 }
 
 .relationship-list--available li .relationship-item-sort,
