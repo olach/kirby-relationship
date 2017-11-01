@@ -48,7 +48,7 @@
 }
 
 .relationship-list button:not([disabled]) {
-	cursor: default;
+	cursor: pointer;
 }
 
 /* Default styling for all list items: */
@@ -61,7 +61,7 @@
 	        align-items: center;
 	padding: 0.25em;
 	overflow: hidden;
-	cursor: default;
+	cursor: pointer;
 }
 
 .relationship-list li > * {
