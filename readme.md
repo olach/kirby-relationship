@@ -238,6 +238,9 @@ users:
     controller: MyPlugin::useravatar
 ```
 
+### Keyboard navigation:
+The field is keyboard accessible. Press <kbd>tab</kbd> and <kbd>shift + tab</kbd> to give focus to the lists. Within a list, use the arrow keys to navigate and press <kbd>space</kbd> to select/deselect an item. In the sortable list, you can sort the items by selecting an item with <kbd>space</kbd> and then move the item using the arrow keys.
+
 ## Version history
 You can find the version history in the [changelog](changelog.md).
 
