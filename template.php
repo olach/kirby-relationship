@@ -19,7 +19,7 @@ foreach ($values as $value) {
 		<?php if ($field->search()): ?>
 		<div class="relationship-search">
 			<i class="icon fa fa-search" aria-hidden="true"></i>
-			<input class="input" type="text" />
+			<input class="input" type="text" role="search" />
 		</div>
 		<?php endif ?>
 		
