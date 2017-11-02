@@ -24,7 +24,7 @@ foreach ($values as $value) {
 		<?php endif ?>
 		
 		<div class="relationship-lists">
-			<ul class="relationship-list relationship-list--available" role="listbox" aria-multiselectable="true" aria-activedescendant="" tabindex="0">
+			<ul class="relationship-list relationship-list--available" role="listbox" aria-multiselectable="true" aria-activedescendant="" aria-label="<?php echo $field->i18n($field->label) ?>" tabindex="0">
 				<?php $counter = 0 ?>
 				<?php foreach ($all_options as $key => $value): ?>
 					<?php $counter++ ?>
@@ -47,7 +47,7 @@ foreach ($values as $value) {
 				<?php endforeach ?>
 			</ul>
 			
-			<ol class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" data-sortable="true" data-deletable="true" tabindex="0">
+			<ol class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" data-sortable="true" data-deletable="true" aria-label="<?php echo $field->i18n($field->label) ?>" tabindex="0">
 				<?php $counter = 0 ?>
 				<?php foreach ($selected_options as $key => $value): ?>
 					<?php $counter++ ?>
