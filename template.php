@@ -37,10 +37,10 @@ foreach ($values as $value) {
 						<span class="relationship-item-label">
 							<?php echo $value ?>
 						</span>
-						<button class="relationship-item-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>">
+						<button class="relationship-item-add" tabindex="-1" type="button">
 							<i class="icon fa fa-plus-circle" aria-hidden="true"></i>
 						</button>
-						<button class="relationship-item-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>">
+						<button class="relationship-item-delete" tabindex="-1" type="button">
 							<i class="icon fa fa-minus-circle" aria-hidden="true"></i>
 						</button>
 					</li>
@@ -60,10 +60,10 @@ foreach ($values as $value) {
 						<span class="relationship-item-label">
 							<?php echo $value; ?>
 						</span>
-						<button class="relationship-item-add" tabindex="-1" type="button" aria-label="<?php echo i18n('add') ?> <?php echo $value ?>">
+						<button class="relationship-item-add" tabindex="-1" type="button">
 							<i class="icon fa fa-plus-circle" aria-hidden="true"></i>
 						</button>
-						<button class="relationship-item-delete" tabindex="-1" type="button" aria-label="<?php echo i18n('delete') ?> <?php echo $value ?>">
+						<button class="relationship-item-delete" tabindex="-1" type="button">
 							<i class="icon fa fa-minus-circle" aria-hidden="true"></i>
 						</button>
 					</li>
