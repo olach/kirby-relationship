@@ -47,7 +47,7 @@ foreach ($values as $value) {
 				<?php endforeach ?>
 			</ul>
 			
-			<ul class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" data-sortable="true" data-deletable="true" tabindex="0">
+			<ol class="relationship-list relationship-list--selected" role="listbox" aria-activedescendant="" data-sortable="true" data-deletable="true" tabindex="0">
 				<?php $counter = 0 ?>
 				<?php foreach ($selected_options as $key => $value): ?>
 					<?php $counter++ ?>
@@ -68,7 +68,7 @@ foreach ($values as $value) {
 						</button>
 					</li>
 				<?php endforeach ?>
-			</ul>
+			</ol>
 		</div>
 		
 	</div>
