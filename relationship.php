@@ -2,6 +2,9 @@
 
 class RelationshipField extends CheckboxesField {
 	
+	public $uniqid;
+	public $items_all;
+	public $items_selected;
 	public $controller;
 	public $search;
 	public $thumbs;
@@ -29,10 +32,131 @@ class RelationshipField extends CheckboxesField {
 	}
 	
 	/**
-	 * Use a template file to build all html.
+	 * Build the html.
 	 */
 	public function content() {
-		return tpl::load(__DIR__ . DS . 'template.php', array('field' => $this));
+		$content = new Brick('div');
+		$content->addClass('field-content relationship-field');
+		$content->attr('data-field', 'relationship');
+		
+		if ($this->search):
+			$content->prepend($this->searchbox());
+		endif;
+		
+		$content->append($this->listboxes());
+		
+		return $content;
+	}
+	
+	/**
+	 * Generates the search box.
+	 */
+	public function searchbox() {
+		$search = new Brick('div');
+		$search->addClass('relationship-search');
+		$search->append('<i class="icon fa fa-search" aria-hidden="true"></i>');
+		$search->append('<input class="input" type="text" role="search" autocomplete="off" />');
+		
+		return $search;
+	}
+	
+	/**
+	 * Generates a wrapper div with two listboxes.
+	 */
+	public function listboxes() {
+		// Generate a unique id:
+		$this->uniqid = uniqid('relationship_');
+		
+		// Cache all and selected items:
+		$this->items_all = $this->options();
+		$this->items_selected = $this->value();
+		
+		$listboxes = new Brick('div');
+		$listboxes->addClass('relationship-lists');
+		
+		$listboxes->append($this->listbox('available'));
+		$listboxes->append($this->listbox('selected'));
+		
+		return $listboxes;
+	}
+	
+	/**
+	 * Generates a listbox with items.
+	 */
+	public function listbox($type) {
+		if ($type === 'available'):
+			$list = new Brick('ul');
+			$list->attr('aria-multiselectable', 'true');
+			
+			$items = array_keys($this->items_all);
+		else:
+			$list = new Brick('ol');
+			$list->attr('data-sortable', 'true');
+			$list->attr('data-deletable', 'true');
+			
+			$items = $this->items_selected;
+		endif;
+		
+		$list->addClass('relationship-list relationship-list--'.$type);
+		$list->attr('aria-activedescendant', '');
+		$list->attr('aria-label', $this->i18n($this->label));
+		$list->attr('role', 'listbox');
+		$list->attr('tabindex', '0');
+		
+		$counter = 0;
+		foreach ($items as $key):
+			$counter++;
+			$id = $this->uniqid.'_'.$type.'_'.$counter;
+			$selected = ($type === 'available') && in_array($key, $this->items_selected);
+			$checked = ($type === 'selected');
+			
+			$item = $this->item($key, $this->items_all[$key], $id, $selected, $checked);
+			$list->append($item);
+		endforeach;
+		
+		return $list;
+	}
+	
+	/**
+	 * Generates a single item to be placed in a listbox.
+	 */
+	public function item($key, $value, $id = '', $selected = false, $checked = false) {
+		$item = new Brick('li');
+		$item->attr('role', 'option');
+		$item->attr('data-key', $key);
+		$item->attr('id', $id);
+		$item->attr('aria-selected', ($selected) ? 'true' : 'false');
+		
+		if ($this->search):
+			$item->attr('data-search-index', trim(mb_strtolower($value)));
+		endif;
+		
+		$item->prepend($this->input($key, $checked));
+		
+		$item->append('<span class="relationship-item-sort"><i class="icon fa fa-bars" aria-hidden="true"></i></span>');
+		$item->append($this->thumbnail($key));
+		$item->append(new Brick('span', $value, ['class' => 'relationship-item-label']));
+		$item->append('<button class="relationship-item-add" tabindex="-1" type="button"><i class="icon fa fa-plus-circle" aria-hidden="true"></i></button>');
+		$item->append('<button class="relationship-item-delete" tabindex="-1" type="button"><i class="icon fa fa-minus-circle" aria-hidden="true"></i></button>');
+
+		return $item;
+	}
+	
+	/**
+	 * The hidden input field used by Kirby to store selection status.
+	 */
+	public function input($key = '', $checked = false) {
+		$input = new Brick('input', null);
+		$input->attr(array(
+			'name'         => $this->name() . '[]',
+			'type'         => 'checkbox',
+			'value'        => $key,
+			'checked'      => $checked,
+			'required'     => false,
+			'aria-hiddden' => 'true'
+		));
+		
+		return $input;
 	}
 	
 	/**
