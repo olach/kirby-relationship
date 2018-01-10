@@ -120,7 +120,9 @@
 	 */
 	$.fn.relationship = function() {
 		return this.each(function() {
-			if ($(this).data('relationship')) {
+			if ($(this).parent().is('.field-is-readonly, .field-is-disabled')) {
+				return $(this);
+			} else if ($(this).data('relationship')) {
 				return $(this);
 			} else {
 				var relationship = new Relationship(this);

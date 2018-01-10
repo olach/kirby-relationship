@@ -1,8 +1,3 @@
-/* Field wrapper: */
-.relationship-field {
-	background-color: white;
-}
-
 /* Wrapper for the lists: */
 .relationship-lists {
 	display: -webkit-flex;
@@ -36,6 +31,14 @@
 	box-shadow: 0px 0px 0px 1px #8dae28; /* Add another 1px border */
 	outline: none;
 	position: relative; /* Prevent border to go underneath the other list */
+}
+
+/* Readonly state for the lists: */
+.relationship-list[aria-readonly="true"] {
+	color: #777;
+	background-color: transparent;
+	filter: grayscale(100%);
+	pointer-events: none;
 }
 
 /* Reset native button styles: */

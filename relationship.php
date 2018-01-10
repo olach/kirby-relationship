@@ -55,7 +55,22 @@ class RelationshipField extends CheckboxesField {
 		$search = new Brick('div');
 		$search->addClass('relationship-search');
 		$search->append('<i class="icon fa fa-search" aria-hidden="true"></i>');
-		$search->append('<input class="input" type="text" role="search" autocomplete="off" />');
+		
+		$input = new Brick('input', null);
+		$input->addClass('input');
+		$input->attr(array(
+			'type'         => 'text',
+			'role'         => 'search',
+			'autocomplete' => 'off',
+		));
+		
+		if ($this->readonly() || $this->disabled()):
+			$input->addClass('input-is-readonly');
+			$input->attr('tabindex', '-1');
+			$input->attr('disabled', true);
+		endif;
+		
+		$search->append($input);
 		
 		return $search;
 	}
@@ -102,6 +117,11 @@ class RelationshipField extends CheckboxesField {
 		$list->attr('aria-label', $this->i18n($this->label));
 		$list->attr('role', 'listbox');
 		$list->attr('tabindex', '0');
+		
+		if ($this->readonly() || $this->disabled()):
+			$list->attr('aria-readonly', 'true');
+			$list->attr('tabindex', '-1');
+		endif;
 		
 		$counter = 0;
 		foreach ($items as $key):
@@ -153,6 +173,8 @@ class RelationshipField extends CheckboxesField {
 			'value'        => $key,
 			'checked'      => $checked,
 			'required'     => false,
+			'readonly'     => $this->readonly(),
+			'disabled'     => $this->disabled(),
 			'aria-hiddden' => 'true'
 		));
 		
