@@ -6,6 +6,8 @@ The Relationship field allows you to select and sort multiple items from a list.
 
 ![relationship-field-demo](https://user-images.githubusercontent.com/1300644/29208814-e1f92692-7e8b-11e7-857f-b646853d3ed8.gif)
 
+This plugin is free to use. But if you find it helpful, feel free to [buy me a coffee](https://www.paypal.me/olachristensson/3usd) ☕️.
+
 ## Requirements
 This field has been tested with Kirby 2.5+, but it should probably work with earlier versions too.
 
