@@ -1,5 +1,7 @@
 # Kirby Relationship field
 
+[![Latest version](https://img.shields.io/github/release/olach/kirby-relationship.svg?maxAge=1800)](https://github.com/olach/kirby-relationship/releases/latest) [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://www.opensource.org/licenses/mit-license.php) [![Required Kirby version](https://img.shields.io/badge/kirby-2.5%2B-red.svg)](https://getkirby.com)
+
 The Relationship field allows you to select and sort multiple items from a list. Think of it as a sortable multiselect field or a sortable checkboxes field.
 
 ![relationship-field-demo](https://user-images.githubusercontent.com/1300644/29208814-e1f92692-7e8b-11e7-857f-b646853d3ed8.gif)
