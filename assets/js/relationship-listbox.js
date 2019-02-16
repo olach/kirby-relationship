@@ -188,18 +188,38 @@ kirbyPlugin.Relationship.Listbox.prototype.checkClickItem = function (event) {
  * @param {Object} item - The HTMLElement to toggle.
  */
 kirbyPlugin.Relationship.Listbox.prototype.toggleSelectItem = function (item) {
-	var selected = item.getAttribute('aria-selected') === 'true' ? 'false' : 'true';
-	
-	if (!this.multiselectable && selected === 'true') {
-		var oldSelectedItem = this.listboxNode.querySelector('[role="option"][aria-selected="true"]');
-		if (oldSelectedItem) {
-			oldSelectedItem.setAttribute('aria-selected', 'false');
+	if (item.getAttribute('aria-selected') === 'true') {
+		this.deselectItem(item);
+	} else {
+		this.selectItem(item);
+	}
+};
+
+/**
+ * Set the aria-selected value of an item to true.
+ *
+ * @param {Object} item - The HTMLElement to adjust.
+ */
+kirbyPlugin.Relationship.Listbox.prototype.selectItem = function (item) {
+	if (!this.multiselectable) {
+		if (oldSelectedItem = this.listboxNode.querySelector('[role="option"][aria-selected="true"]')) {
+			this.deselectItem(oldSelectedItem);
 		}
 	}
 	
-	item.setAttribute('aria-selected', selected);
 	
-	this.selectCallback(item, selected === 'true');
+	item.setAttribute('aria-selected', 'true');	
+	this.selectCallback(item, true);
+};
+
+/**
+ * Set the aria-selected value of an item to false.
+ *
+ * @param {Object} item - The HTMLElement to adjust.
+ */
+kirbyPlugin.Relationship.Listbox.prototype.deselectItem = function (item) {
+	item.setAttribute('aria-selected', 'false');	
+	this.selectCallback(item, false);
 };
 
 /**
