@@ -25,7 +25,7 @@ Updating is also easy:
     $ kirby plugin:update olach/kirby-relationship
 
 ## Usage
-The field is an extension of the [Checkboxes field](https://getkirby.com/docs/cheatsheet/panel-fields/checkboxes). All options of that field apply to this field too. The data is saved as a comma separated string, which means that this field is interchangeable with the Checkboxes field.
+The field is an extension of the [Checkboxes field](https://k2.getkirby.com/docs/cheatsheet/panel-fields/checkboxes). All options of that field apply to this field too. The data is saved as a comma separated string, which means that this field is interchangeable with the Checkboxes field.
 
 ### Example with predefined options
 #### Blueprint
