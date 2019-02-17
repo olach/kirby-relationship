@@ -11,6 +11,8 @@ This plugin is free to use. But if you find it helpful, feel free to [buy me a c
 ## Requirements
 This field has been tested with Kirby 2.5+, but it should probably work with earlier versions too.
 
+Looking for a version compatible with Kirby 3? [A new version](https://github.com/olach/kirby3-relationship) is currently in development.
+
 ## Installation
 ### Manually
 [Download the files](https://github.com/olach/kirby-relationship/archive/master.zip) and place them inside `site/fields/relationship/`.
