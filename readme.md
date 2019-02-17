@@ -116,6 +116,20 @@ related:
   help: Select from 3 up to 6 articles.
 ```
 
+### Counter indicator
+ A handy indicator of the current amount of selected items can be displayed in the upper right corner with the option `counter`. This indicator is always shown when the min/max option is active, but can be disabled by setting its value to `false`.
+
+```yaml
+related:
+  label: Related articles
+  type: relationship
+  options: query
+  query:
+    fetch: siblings
+  search: true
+  counter: true
+```
+
 ### Controller:
 This field is extended with an option to use a user specified function to have even more control of the options that will be loaded. The idea is taken from the [Controlled List plugin](https://github.com/rasteiner/controlledlist).
 

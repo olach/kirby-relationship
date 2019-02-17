@@ -8,6 +8,7 @@ class RelationshipField extends CheckboxesField {
 	public $controller;
 	public $search;
 	public $thumbs;
+	public $counter;
 	public $min;
 	public $max;
 	
@@ -235,7 +236,7 @@ class RelationshipField extends CheckboxesField {
 	 * Generates a counter element if min or max is set.
 	 */
 	public function counter() {
-		if (!$this->min && !$this->max || $this->readonly()) return null;
+		if ((!$this->min && !$this->max && !$this->counter) || $this->readonly() || $this->counter === false) return null;
 		
 		$counter = new Brick('div');
 		$counter->addClass('field-counter marginalia text');
