@@ -8,6 +8,8 @@ class RelationshipField extends CheckboxesField {
 	public $controller;
 	public $search;
 	public $thumbs;
+	public $min;
+	public $max;
 	
 	static public $assets = array(
 		'js' => array(
@@ -121,6 +123,9 @@ class RelationshipField extends CheckboxesField {
 		if ($this->readonly() || $this->disabled()):
 			$list->attr('aria-readonly', 'true');
 			$list->attr('tabindex', '-1');
+		else:
+			$list->attr('data-min', $this->min);
+			$list->attr('data-max', $this->max);
 		endif;
 		
 		$counter = 0;
@@ -214,5 +219,15 @@ class RelationshipField extends CheckboxesField {
 		$thumbnail->addClass('relationship-item-thumb');
 		
 		return $thumbnail;
+	}
+	
+	/**
+	 * Validate min and max items.
+	 */
+	public function validate() {
+		if (is_numeric($this->min) and !v::min(count($this->value()), $this->min)) return false;
+		if (is_numeric($this->max) and !v::max(count($this->value()), $this->max)) return false;
+		
+		return true;
 	}
 }

@@ -16,11 +16,14 @@ kirbyPlugin.Relationship.Listbox = function (listboxNode) {
 	this.multiselectable  = listboxNode.getAttribute('aria-multiselectable') === 'true';
 	this.sortable         = listboxNode.getAttribute('data-sortable') === 'true';
 	this.deletable        = listboxNode.getAttribute('data-deletable') === 'true';
+	this.min              = listboxNode.getAttribute('data-min');
+	this.max              = listboxNode.getAttribute('data-max');
 	this.selectCallback   = function (element, selected) {};
 	this.addCallback      = function (element) {};
 	this.deleteCallback   = function (element) {};
 	this.sortCallback     = function (element) {};
 
+	this.checkMinMax();
 	this.registerEvents();
 };
 
@@ -137,6 +140,31 @@ kirbyPlugin.Relationship.Listbox.prototype.clearActiveDescendant = function () {
 };
 
 /**
+ * Check if the Listbox items exceeds the min/max values.
+ *
+ * @param {Object} item - The HTMLElement to adjust.
+ */
+kirbyPlugin.Relationship.Listbox.prototype.checkMinMax = function () {
+	if (this.multiselectable) {
+		var items = this.listboxNode.querySelectorAll('[role="option"][aria-selected="true"]').length;
+	} else {
+		var items = this.listboxNode.querySelectorAll('[role="option"]').length;
+	}
+	
+	if ((this.min) && (items <= this.min)) {
+		this.listboxNode.setAttribute('data-delete', 'disabled')
+	} else {
+		this.listboxNode.removeAttribute('data-delete');
+	}
+	
+	if ((this.max) && (items >= this.max)) {
+		this.listboxNode.setAttribute('data-add', 'disabled')
+	} else {
+		this.listboxNode.removeAttribute('data-add');
+	}
+};
+
+/**
  * Check if an item is clicked on. If so, focus on it and select it.
  *
  * @param {Object} event - The mousedown event object.
@@ -207,8 +235,13 @@ kirbyPlugin.Relationship.Listbox.prototype.selectItem = function (item) {
 		}
 	}
 	
+	if (this.multiselectable) {
+		var selectedItems = this.listboxNode.querySelectorAll('[role="option"][aria-selected="true"]').length;
+		if ((this.max) && (selectedItems >= this.max)) return false;
+	}
 	
-	item.setAttribute('aria-selected', 'true');	
+	item.setAttribute('aria-selected', 'true');
+	this.checkMinMax();
 	this.selectCallback(item, true);
 };
 
@@ -218,7 +251,13 @@ kirbyPlugin.Relationship.Listbox.prototype.selectItem = function (item) {
  * @param {Object} item - The HTMLElement to adjust.
  */
 kirbyPlugin.Relationship.Listbox.prototype.deselectItem = function (item) {
-	item.setAttribute('aria-selected', 'false');	
+	if (this.multiselectable) {
+		var selectedItems = this.listboxNode.querySelectorAll('[role="option"][aria-selected="true"]').length;
+		if ((this.min) && (selectedItems <= this.min)) return false;
+	}
+	
+	item.setAttribute('aria-selected', 'false');
+	this.checkMinMax();
 	this.selectCallback(item, false);
 };
 
@@ -229,8 +268,11 @@ kirbyPlugin.Relationship.Listbox.prototype.deselectItem = function (item) {
  * @returns {Object} The HTMLElement that were added to the listbox.
  */
 kirbyPlugin.Relationship.Listbox.prototype.addItem = function (item) {
+	if ((this.max) && (this.listboxNode.childElementCount >= this.max)) return false;
+	
 	var addedItem = this.listboxNode.appendChild(item);
 	
+	this.checkMinMax();
 	this.addCallback(addedItem);
 	
 	return addedItem;
@@ -243,6 +285,8 @@ kirbyPlugin.Relationship.Listbox.prototype.addItem = function (item) {
  * @returns {Object} The HTMLElement that was removed from the listbox.
  */
 kirbyPlugin.Relationship.Listbox.prototype.deleteItem = function (item) {
+	if ((this.min) && (this.listboxNode.childElementCount <= this.min)) return false;
+	
 	var previousItem = item.previousElementSibling;
 	var nextItem = item.nextElementSibling;
 	
@@ -258,6 +302,7 @@ kirbyPlugin.Relationship.Listbox.prototype.deleteItem = function (item) {
 	
 	var deletedItem = this.listboxNode.removeChild(item);
 	
+	this.checkMinMax();
 	this.deleteCallback(deletedItem);
 	
 	return deletedItem;

@@ -33,6 +33,12 @@
 	position: relative; /* Prevent border to go underneath the other list */
 }
 
+/* List in focus when field has validation errors: */
+.field-with-error .relationship-list:focus {
+	border-color: #000;
+	box-shadow: 0px 0px 0px 1px #000;
+}
+
 /* Readonly state for the lists: */
 .relationship-list[aria-readonly="true"] {
 	color: #777;
@@ -130,6 +136,11 @@
 	display: none;
 }
 
+.relationship-list--available[data-add="disabled"] .relationship-item-add {
+	opacity: 0.2;
+	cursor: not-allowed;
+}
+
 /* Selected list items: */
 .relationship-list--selected li {
 	cursor: move;
@@ -138,6 +149,11 @@
 
 .relationship-list--selected li .relationship-item-add {
 	display: none;
+}
+
+.relationship-list--selected[data-delete="disabled"] .relationship-item-delete {
+	opacity: 0.2;
+	cursor: not-allowed;
 }
 
 .relationship-list--selected:focus li.is-focused {

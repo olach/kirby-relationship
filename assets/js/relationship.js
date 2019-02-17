@@ -69,6 +69,7 @@
 			
 			// Make the selected item unselected again in the available list:
 			$available_item.attr('aria-selected', false);
+			listbox_available.checkMinMax();
 			
 			// Notify Kirby that some changes are made:
 			$available_item.find('input').trigger('change');

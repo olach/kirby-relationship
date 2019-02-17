@@ -98,6 +98,22 @@ related:
   search: true
 ```
 
+### Min and max items:
+You can control the minimum number of required items and the maximum number of allowed items. Don't forget to add a help text to inform the editor about the requirements.
+
+```yaml
+related:
+  label: Related articles
+  type: relationship
+  options: query
+  query:
+    fetch: siblings
+  search: true
+  min: 3
+  max: 6
+  help: Select from 3 up to 6 articles.
+```
+
 ### Controller:
 This field is extended with an option to use a user specified function to have even more control of the options that will be loaded. The idea is taken from the [Controlled List plugin](https://github.com/rasteiner/controlledlist).
 
