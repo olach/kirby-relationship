@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 (2019-02-17)
+- ✨ Added support for min/max items
+- ✨ Option to show a counter indicator
+
 ## 2.0.0 (2018-01-10)
 Major new version, rewritten from scratch with accessibility improvements!
 
