@@ -14,6 +14,11 @@
 		var $search_input = $(field).find('.relationship-search input');
 		var $search_items = $list_available.find('li');
 		
+		// Get reference to counter element:
+		var $counter = $(field).siblings('.field-counter');
+		var min = $list_selected.data('min');
+		var max = $list_selected.data('max');
+		
 		// An item in the available list has been selected/deselected:
 		listbox_available.selectCallback = function (item, selected) {
 			if (selected) {
@@ -40,6 +45,8 @@
 			
 			// Notify Kirby that some changes are made:
 			$addedItem.find('input').trigger('change');
+			
+			updateCounter();
 			
 			// Scroll to bottom of the list to show the new item:
 			$list_selected.stop().delay(20).animate({
@@ -73,6 +80,8 @@
 			
 			// Notify Kirby that some changes are made:
 			$available_item.find('input').trigger('change');
+			
+			updateCounter();
 		}
 		
 		// Item in selected list has changed order:
@@ -114,6 +123,21 @@
 			// Scroll to top:
 			$list_available.scrollTop(0);
 		});
+		
+		/**
+		 * Update the counter:
+		 */
+		function updateCounter() {
+			var count = $list_selected.find('li').length;
+			
+			$counter.text(count + (max ? '/' + max : ''));
+			
+			if ((max && count > max) || (min && count < min)) {
+				$counter.addClass('outside-range');
+			} else {
+				$counter.removeClass('outside-range');
+			}
+		}
 	};
 	
 	/**

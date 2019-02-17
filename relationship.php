@@ -230,4 +230,33 @@ class RelationshipField extends CheckboxesField {
 		
 		return true;
 	}
+	
+	/**
+	 * Generates a counter element if min or max is set.
+	 */
+	public function counter() {
+		if (!$this->min && !$this->max || $this->readonly()) return null;
+		
+		$counter = new Brick('div');
+		$counter->addClass('field-counter marginalia text');
+		
+		if (!$this->validate()) {
+			$counter->addClass('outside-range');
+		}
+		
+		$counter->html(count($this->value()) . ($this->max ? '/' . $this->max : ''));
+		
+		return $counter;
+	}
+	
+	/**
+	 * Output everything.
+	 */
+	public function template() {
+		return $this->element()
+			->append($this->label())
+			->append($this->content())
+			->append($this->counter())
+			->append($this->help());
+	}
 }
